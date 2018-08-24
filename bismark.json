@@ -1,0 +1,159 @@
+{
+	"available": true,
+	"checkpointable": false,
+	"defaultMemoryPerNode": 32,
+	"defaultProcessorsPerNode": 16,
+	"defaultMaxRunTime": "24:00:00",
+	"defaultNodeCount": 1,
+	"defaultQueue": "skx-normal",
+	"deploymentPath": "jawon/applications/bismark-0.18.1/stampede2",
+	"deploymentSystem": "data.iplantcollaborative.org",
+	"executionSystem": "tacc-stampede2-wonaya",
+	"executionType": "HPC",
+	"helpURI": "http://www.bioinformatics.babraham.ac.uk/projects/bismark/",
+	"label": "Bismark",
+	"longDescription": "",
+	"modules": [],
+	"name": "jawon-bismark-s2",
+	"parallelism": "SERIAL",
+	"shortDescription": "Bismark bisulfite sequencing aligner",
+	"tags": [
+		"Bisulfite",
+		"methylation"
+	],
+	"ontology": [
+		"http://edamontology.org/data_3210",
+		"http://edamontology.org/topic_3173",
+		"http://sswapmeet.sswap.info/iplant/apps/Application"
+	],
+	"templatePath": "test.template",
+	"testPath": "test_bismark.sh",
+	"version": "0.18.1",
+	"inputs": [{
+			"id": "fastq1",
+			"value": {
+				"default": "1.fastq",
+				"order": 0,
+				"required": true,
+				"visible": true
+			},
+			"semantics": {
+				"ontology": [
+					"http://sswapmeet.sswap.info/mime/application/X-fastq"
+				],
+				"minCardinality": 1,
+				"fileTypes": [
+					"raw-0"
+				]
+			},
+			"details": {
+				"description": "Single or 1st Paired-end reads",
+				"argument": null,
+				"showArgument": false
+			}
+		},
+		{
+			"id": "fastq2",
+			"value": {
+				"default": "2.fastq",
+				"order": 0,
+				"required": false,
+				"visible": true
+			},
+			"semantics": {
+				"ontology": [
+					"http://sswapmeet.sswap.info/mime/application/X-fastq"
+				],
+				"minCardinality": 1,
+				"fileTypes": [
+					"raw-0"
+				]
+			},
+			"details": {
+				"description": "2nd Paired-end reads",
+				"argument": null,
+				"showArgument": false
+			}
+		},
+		{
+			"id": "genome_folder",
+			"value": {
+				"default": ".",
+				"order": 0,
+				"required": true,
+				"visible": true
+			},
+			"semantics": {
+				"minCardinality": 1
+			},
+			"details": {
+				"description": "Directory containing Bisulfite_Genome folder",
+				"argument": null,
+				"showArgument": false
+			}
+		}
+	],
+	"parameters": [{
+			"id": "paired",
+			"value": {
+				"default": false,
+				"order": 1,
+				"required": false,
+				"type": "bool",
+				"visible": true
+			},
+			"semantics": {
+				"ontology": [
+					"xs:boolean"
+				]
+			},
+			"details": {
+				"description": "Check for Paired end read",
+				"label": "Paired end",
+				"showArgument": false
+			}
+		},
+		{
+			"id": "mismatches",
+			"value": {
+				"default": 0,
+				"order": 0,
+				"required": false,
+				"type": "number",
+				"visible": true
+			},
+			"semantics": {
+				"ontology": [
+					"xs:integer"
+				]
+			},
+			"details": {
+				"description": "Mismatches",
+				"label": "Mismatches (Default: 0)",
+				"argument": " -N ",
+                                "showArgument": true
+			}
+		},
+		{
+			"id": "seed_len",
+			"value": {
+				"default": 20,
+				"order": 1,
+				"required": false,
+				"type": "number",
+				"visible": true
+			},
+			"semantics": {
+				"ontology": [
+					"xs:integer"
+				]
+			},
+			"details": {
+				"description": "Multi-seed length",
+				"label": "Seed length (Default: 20)",
+				"argument": " -L ",
+                                "showArgument": true
+			}
+		}
+	]
+}

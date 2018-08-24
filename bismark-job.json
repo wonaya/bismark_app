@@ -1,0 +1,20 @@
+{
+    "jobName": "test_bismark",
+    "softwareName": "jawon-bismark-s2-0.18.1",
+    "processorsPerNode": 16,
+    "requestedTime": "00:10:00",
+    "memoryPerNode": 32,
+    "nodeCount": 1,
+    "batchQueue": "normal",
+    "archive": true,
+    "archivePath": "",
+    "inputs" : {
+    	"fastq1" : "agave://data.iplantcollaborative.org/shared/iplantcollaborative/example_data/bismark.20151015/R1.fastq",
+        "fastq2" : "agave://data.iplantcollaborative.org/shared/iplantcollaborative/example_data/bismark.20151015/R2.fastq",
+        "genome_folder" : "agave://data.iplantcollaborative.org/shared/iplantcollaborative/example_data/bismark.20151015/genome"
+    },
+    "parameter": {
+        "paired" : true
+    }
+}
+
