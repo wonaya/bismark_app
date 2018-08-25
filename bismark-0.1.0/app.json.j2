@@ -90,69 +90,6 @@
 			}
 		}
 	],
-	"parameters": [{
-			"id": "paired",
-			"value": {
-				"default": false,
-				"order": 1,
-				"required": false,
-				"type": "bool",
-				"visible": true
-			},
-			"semantics": {
-				"ontology": [
-					"xs:boolean"
-				]
-			},
-			"details": {
-				"description": "Check for Paired end read",
-				"label": "Paired end",
-				"showArgument": false
-			}
-		},
-		{
-			"id": "mismatches",
-			"value": {
-				"default": 0,
-				"order": 0,
-				"required": false,
-				"type": "number",
-				"visible": true
-			},
-			"semantics": {
-				"ontology": [
-					"xs:integer"
-				]
-			},
-			"details": {
-				"description": "Mismatches",
-				"label": "Mismatches (Default: 0)",
-				"argument": " -N ",
-        "showArgument": true
-			}
-		},
-		{
-			"id": "seed_len",
-			"value": {
-				"default": 20,
-				"order": 1,
-				"required": false,
-				"type": "number",
-				"visible": true
-			},
-			"semantics": {
-				"ontology": [
-					"xs:integer"
-				]
-			},
-			"details": {
-				"description": "Multi-seed length",
-				"label": "Seed length (Default: 20)",
-				"argument": " -L ",
-        "showArgument": true
-			}
-		}
-    ],
   "parameters": [{
     "id": "CONTAINER_IMAGE",
     "value": {
@@ -162,6 +99,68 @@
       "visible": false,
       "required": true
     }
-  }],
+  },
+  {
+      "id": "paired",
+      "value": {
+        "default": false,
+        "order": 1,
+        "required": false,
+        "type": "bool",
+        "visible": true
+      },
+      "semantics": {
+        "ontology": [
+          "xs:boolean"
+        ]
+      },
+      "details": {
+        "description": "Check for Paired end read",
+        "label": "Paired end",
+        "showArgument": false
+      }
+    },
+    {
+      "id": "mismatches",
+      "value": {
+        "default": 0,
+        "order": 0,
+        "required": false,
+        "type": "number",
+        "visible": true
+      },
+      "semantics": {
+        "ontology": [
+          "xs:integer"
+        ]
+      },
+      "details": {
+        "description": "Mismatches",
+        "label": "Mismatches (Default: 0)",
+        "argument": " -N ",
+        "showArgument": true
+      }
+    },
+    {
+      "id": "seed_len",
+      "value": {
+        "default": 20,
+        "order": 1,
+        "required": false,
+        "type": "number",
+        "visible": true
+      },
+      "semantics": {
+        "ontology": [
+          "xs:integer"
+        ]
+      },
+      "details": {
+        "description": "Multi-seed length",
+        "label": "Seed length (Default: 20)",
+        "argument": " -L ",
+        "showArgument": true
+      }
+    }],
   "outputs": []
 }

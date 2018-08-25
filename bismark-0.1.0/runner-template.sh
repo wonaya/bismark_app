@@ -36,8 +36,6 @@ if [ "${PAIRED}" -eq 0 ]; then ARGS="${ARGS} --single_end ${FASTQ1_F} "; fi
 #   Example: docker run centos:7 uname -a
 #            container_exec centos:7 uname -a
 
-# Add home1 to singularity bindpath to run on stampede2
-export SINGULARITY_BINDPATH="/home1:/home"
 
 echo container_exec ${CONTAINER_IMAGE} bismark -p 16 ${GENOME_FOLDER} ${FASTQ1_F}
 container_exec ${CONTAINER_IMAGE} bismark -p 16 ${GENOME_FOLDER} ${FASTQ1_F}
