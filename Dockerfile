@@ -1,10 +1,11 @@
 
-################## Agave ######################
+############### TACC BASE IMAGE ###################
 FROM cyverse/apps:python3
 
-COPY --from=biocontainers/samtools:latest /opt/conda/bin/samtools /opt/bin/
+################## SAMTOOLS ######################
+COPY --from=biocontainers/samtools:1.3.1 /opt/conda/bin/samtools /opt/bin/
 ENV PATH "/opt/bin/:$PATH"
-CMD ["samtools"]
 
-# ADD config.yml /config.yml
-# ADD src /opt/src
+################## BISMARK ######################
+ADD src /opt/src
+ENV PATH "/opt/src/:$PATH"
