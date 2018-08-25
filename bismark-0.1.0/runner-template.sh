@@ -13,16 +13,6 @@ then
     fi
 fi
 
-# Usage: container_exec IMAGE COMMAND OPTIONS
-#   Example: docker run centos:7 uname -a
-#            container_exec centos:7 uname -a
-
-container_exec ${CONTAINER_IMAGE}
-
-module load bowtie samtools
-
-chmod a+rwx bismark
-export PATH=$PATH:"$PWD"
 
 #input
 FASTQ1=${fastq1}
@@ -32,18 +22,30 @@ PAIRED=${paired}
 MISMATCHES=${mismatches}
 SEED_LEN=${seed_len}
 FASTQ1_F=$(basename ${FASTQ1})
-FASTQ2_F=$(basename ${FASTQ2})
+if [ "${PAIRED}" -eq 1 ]; then FASTQ2_F=$(basename ${FASTQ2}); fi
 ARGS=""
 #if [ ${MISMATCHES} != 0 ]; then ARGS="${ARGS} -N ${MISMATCHES} "; fi
 #if [ ${SEED_LEN} -ne 20  ]; then ARGS="${ARGS} -L ${SEED_LEN} "; fi
 ARGS="${ARGS} ${SEED_LEN} ${MISMATCHES} ";
 
 # Build up an ARGS string for the program
-if [ ${PAIRED} -eq 1 ]; then ARGS="${ARGS} -1 ${FASTQ1_F} -2 ${FASTQ2_F} "; fi
-if [ ${PAIRED} -eq 0 ]; then ARGS="${ARGS} --single_end ${FASTQ1_F} "; fi
+if [ "${PAIRED}" -eq 1 ]; then ARGS="${ARGS} -1 ${FASTQ1_F} -2 ${FASTQ2_F} "; fi
+if [ "${PAIRED}" -eq 0 ]; then ARGS="${ARGS} --single_end ${FASTQ1_F} "; fi
 
-echo "bismark --genome_folder ${GENOME_FOLDER} ${FASTQ1_F}"
-# Run the actual program
-bismark -p 16 ${GENOME_FOLDER} ${FASTQ1_F}
-rm -Rf ${FASTQ1_F} ${GENOME_FOLDER}
-if [ ${PAIRED} -eq 1 ]; then rm -Rf ${FASTQ2_F} ; fi
+# Usage: container_exec IMAGE COMMAND OPTIONS
+#   Example: docker run centos:7 uname -a
+#            container_exec centos:7 uname -a
+
+# Add home1 to singularity bindpath to run on stampede2
+export SINGULARITY_BINDPATH="/home1:/home"
+
+echo container_exec ${CONTAINER_IMAGE} bismark -p 16 ${GENOME_FOLDER} ${FASTQ1_F}
+container_exec ${CONTAINER_IMAGE} bismark -p 16 ${GENOME_FOLDER} ${FASTQ1_F}
+
+# echo "bismark --genome_folder ${GENOME_FOLDER} ${FASTQ1_F}"
+# # Run the actual program
+# bismark -p 16 ${GENOME_FOLDER} ${FASTQ1_F}
+
+# Clean up
+# rm -Rf ${FASTQ1_F} ${GENOME_FOLDER}
+# if [ ${PAIRED} -eq 1 ]; then rm -Rf ${FASTQ2_F} ; fi

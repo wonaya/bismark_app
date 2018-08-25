@@ -6,9 +6,11 @@
   "parallelism": "SERIAL",
   "deploymentPath": "{{ agave.username }}/apps/{{ app.bundle }}",
   "deploymentSystem": "data.iplantcollaborative.org",
-  "defaultProcessorsPerNode": 1,
-  "defaultNodeCount": 1,
-  "defaultQueue": "normal",
+  "defaultMemoryPerNode": 32,
+	"defaultProcessorsPerNode": 16,
+	"defaultMaxRunTime": "24:00:00",
+	"defaultNodeCount": 1,
+	"defaultQueue": "skx-normal",
   "label": "{{ date_time.iso8601_micro }}",
   "modules": ["load tacc-singularity"],
   "shortDescription": "Bismark bisulfite sequencing aligner",
@@ -27,7 +29,7 @@
       {
 			"id": "fastq1",
 			"value": {
-				"default": "1.fastq",
+				"default": "agave://data.iplantcollaborative.org/shared/iplantcollaborative/example_data/bismark.20151015/R1.fastq",
 				"order": 0,
 				"required": true,
 				"visible": true
@@ -73,7 +75,7 @@
 		{
 			"id": "genome_folder",
 			"value": {
-				"default": ".",
+				"default": "agave://data.iplantcollaborative.org/shared/iplantcollaborative/example_data/bismark.20151015/genome",
 				"order": 0,
 				"required": true,
 				"visible": true
@@ -126,7 +128,7 @@
 				"description": "Mismatches",
 				"label": "Mismatches (Default: 0)",
 				"argument": " -N ",
-                                "showArgument": true
+        "showArgument": true
 			}
 		},
 		{
@@ -147,7 +149,7 @@
 				"description": "Multi-seed length",
 				"label": "Seed length (Default: 20)",
 				"argument": " -L ",
-                                "showArgument": true
+        "showArgument": true
 			}
 		}
     ],
